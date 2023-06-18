@@ -1,0 +1,3 @@
+[submodule "user/LiteEMF"]
+	path = user/LiteEMF
+	url = git@github_cesar.com:LiteEMF/LiteEMF.git
