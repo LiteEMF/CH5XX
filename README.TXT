@@ -1,4 +1,15 @@
 
+
+# LiteEMF build
+* keil打开工程文件: project/project.uvproj 编译
+
+
+
+
+
+
+# 官方sdk描述
+
 南京沁恒电子有限公司 2015.04
 最新资料请到我们的网站上查询
 http://wch.cn

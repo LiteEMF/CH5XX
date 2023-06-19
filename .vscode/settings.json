@@ -1,0 +1,29 @@
+{
+	"files.associations": {
+		"Makefile": "makefile",
+		"USBH_KM.C": "cpp",
+		"EXAM1.C": "cpp",
+		"hal_typedef.h": "c",
+		"compiler_abstraction.h": "c",
+		"stdint.h": "c",
+		"stddef.h": "c",
+		"USBH_AOA.C": "cpp",
+		"emf_typedef.h": "c",
+		"stdbool.h": "c",
+		"api_bt.h": "c",
+		"ps_controller.h": "c",
+		"emf_utils.h": "c",
+		"xbox_controller.h": "c",
+		"adb_auth_sign.h": "c",
+		"bignum.h": "c",
+		"hw_config.h": "c",
+		"usbh.h": "c",
+		"usbh_core.h": "c",
+		"usbh_class.h": "c",
+		"api_log.h": "c",
+		"emf_mem.h": "c",
+		"emf_math.h": "c",
+		"crc.h": "c",
+		"vector.h": "c"
+	}
+}
