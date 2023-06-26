@@ -18,6 +18,7 @@
 
 #include  "api/api_iic_host.h"
 #include  "api/api_gpio.h"
+#include  "api/api_system.h"
 
 /******************************************************************************************************
 ** Defined

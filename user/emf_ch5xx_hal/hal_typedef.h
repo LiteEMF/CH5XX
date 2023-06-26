@@ -16,7 +16,7 @@
 extern "C" {
 #endif
 
-
+#pragma  NOAREGS
 
 #ifdef __cplusplus
 }

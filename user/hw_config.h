@@ -21,7 +21,7 @@ extern "C" {
 /******************************************************************************************************
 ** Defined
 *******************************************************************************************************/
-#define LOG_ENABLE                  0
+#define LOG_ENABLE                  1
 
 #define PROJECT_KM                  0           //keyboard and mouse project
 #define PROJECT_GAMEPAD             1           //keyboard and mouse
@@ -54,27 +54,23 @@ extern "C" {
 	#define GAMEPAD1						1
 
 	#if GAMEPAD1	
-		#define APP_KEY_ENABLE			0
-		#define APP_IMU_ENABLE			0
-		#define IMU_SH3001_ID			0
-		#define APP_JOYSTICK_ENABLE		0
-		#define APP_RUMBLE_ENABLE		0
-		#define APP_RGB_ENABLE			0
-		#define APP_RGB_NUMS 			3
+		#define APP_KEY_ENABLE			1
 		#define API_WDT_ENABLE			0
+		#define API_TIMER_BIT_ENABLE 	BIT(0)
 
-		#define API_USBD_BIT_ENABLE			0 //BIT(1)
-		#define USBD_NUM					2
+		#define API_USBD_BIT_ENABLE			BIT(0)
+		#define USBD_NUM					1
 		#define USBD_TYPE_SUPPORT 			BIT_ENUM(DEV_TYPE_HID)
 		#define USBD_HID_SUPPORT			(BIT_ENUM(HID_TYPE_KB) | BIT_ENUM(HID_TYPE_MOUSE) | BIT_ENUM(HID_TYPE_CONSUMER))
 		// #define USBD_HID_SUPPORT			(BIT_ENUM(HID_TYPE_KB))
 
-		#define API_USBH_BIT_ENABLE			0 //(0)
+		#define API_USBH_BIT_ENABLE			0 //(BIT(0) | BIT(1))
+		#define	USBH_NUM					2
 		#define USBH_TYPE_SUPPORT			(BIT_ENUM(DEV_TYPE_HID) | BIT_ENUM(DEV_TYPE_HUB))
 		#define USBH_HID_SUPPORT			(BIT_ENUM(HID_TYPE_KB) | BIT_ENUM(HID_TYPE_MOUSE) | BIT_ENUM(HID_TYPE_CONSUMER))
 
 
-		#define EMF_MEMPOLL_SIZE			(32)			/*2k*/
+		#define EMF_MEMPOLL_SIZE			(0x200)
 
 		#define SW_VERSION                     	0x01
         #define DEFAULT_NAME			       	"gamepad"

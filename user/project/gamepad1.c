@@ -170,6 +170,16 @@ void usbd_user_set_device_desc(uint8_t id, usb_desc_device_t *pdesc)
 #endif
 
 
+void app_key_vendor_scan(uint32_t *pkey)
+{
+	
+}
+
+void app_key_event(void)
+{
+    
+}
+
 
 void hw_user_vender_init(void)
 {
@@ -245,7 +255,7 @@ void user_vender_handler(void)
     //use test
 	#if API_USBD_BIT_ENABLE
     if(m_systick - timer >= 3000){
-		uint8_t usb_id = 1;
+		uint8_t usb_id = 0;
 		usbd_dev_t *pdev = usbd_get_dev(usb_id);
 		trp_handle_t handle = {TR_USBD, 0, U16(DEF_DEV_TYPE_HID,DEF_HID_TYPE_KB)};
         
@@ -253,7 +263,7 @@ void user_vender_handler(void)
 		timer = m_systick;
 
         // logd("pdev->ready=%d\n",pdev->ready);
-        if(pdev->ready && 0){
+        if(pdev->ready && 1){
             static kb_t kb={KB_REPORT_ID,0};
             static mouse_t mouse={MOUSE_REPORT_ID,0};
 
