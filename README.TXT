@@ -1,10 +1,37 @@
 
 
-# LiteEMF build
+# LiteEMF on CH5XX
+
+本例程在CH5XX官方SDK上移植了LiteEMF框架. 开发者可以在这个基础上开发自己的项目.  
+`持续更新中...`
+
+## 关于沁恒
+
+[南京沁恒微电子股份有限公司](https://www.wch.cn/)成立于2004年，是一家接口芯片和全栈MCU芯片公司。
+
+沁恒专注于连接技术和MCU内核研究，基于底层IP研发+芯片设计+底层共性软件开发的全栈研发模式，以自研的处理器IP和收发器IP模块为主，整合构建USB、以太网、蓝牙等接口芯片，及连接型/互联型/无线型全栈MCU+单片机。
+
+技术上涉及“感知+控制+连接+云聚”：ADC模拟检测、MCU智能控制及电机驱动算法、HID人机交互、Ethernet/Bluetooth-LE网络通信、UART/USB/PD/PCI/CAN等接口通讯、物联协议和云端服务，致力于为客户提供万物互联、上下互通的芯片及解决方案。
+
+
+## LiteEMF适配
+ 
+ 在原厂sdk 基础上适配了LiteEMF框架, emf_ch5xx_hal/目录下是CH5XX的hal驱动, project/ 目录下为工程文件
+
+ * mem动态内存适配的是FreeRTOS的heap_4
+ * usbd/usbh 驱动适配完成
+ * TIMER 目前只适配了TIME0
+ * ADC, IIC, SPI, 代码编写完成,需要验证
+ * DFU升级功能呢目前还未完成
+
+
+## 快速开始
+
+* 下载项目git命令行下载: `git clone git@github.com:LiteEMF/CH5XX.git`
+* 更新LiteEMF子模块命令行输入: `git submodule init`  `git submodule update`
 * keil打开工程文件: project/project.uvproj 编译
-
-
-
+* 通过下载工具[WCHISPTool_Setup.exe](https://www.wch.cn/downloads/WCHISPTool_Setup_exe.html) usb/uart下载
+* hw_confg.h,hw_board.h文件添加或修改自己的硬件和工程
 
 
 

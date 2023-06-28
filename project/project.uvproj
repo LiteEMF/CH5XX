@@ -549,11 +549,6 @@
               <FilePath>..\user\LiteEMF\app\rgb\rgb_driver.c</FilePath>
             </File>
             <File>
-              <FileName>app_otg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user\LiteEMF\app\usb\app_otg.c</FilePath>
-            </File>
-            <File>
               <FileName>usbmuxd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\user\LiteEMF\app\usbmuxd\usbmuxd.c</FilePath>
@@ -857,6 +852,16 @@
               <FileName>usbd_printer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\user\LiteEMF\api\usb\device\usbd_printer.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_msd_scsi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user\LiteEMF\api\usb\device\usbd_msd_scsi.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_msd_ram_disk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user\LiteEMF\api\usb\device\usbd_msd_ram_disk.c</FilePath>
             </File>
           </Files>
         </Group>

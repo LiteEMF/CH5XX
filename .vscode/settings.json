@@ -69,6 +69,19 @@
 		"usbd.h": "c",
 		"usbd_core.h": "c",
 		"ch559.h": "c",
-		"emf_config.h": "c"
+		"emf_config.h": "c",
+		"EXAM11.C": "cpp",
+		"Compound Dev.C": "cpp",
+		"CH559UFR.C": "cpp",
+		"EXAM9.C": "cpp",
+		"usb_msd_typedef.h": "c",
+		"CH559.H": "cpp",
+		"usbd_msd_scsi.h": "c",
+		"app_gamepad.h": "c",
+		"api_transport.h": "c",
+		"switch_controller.h": "c",
+		"gamepad_controller.h": "c",
+		"usbd_class.h": "c",
+		"usbd_audio.h": "c"
 	}
 }

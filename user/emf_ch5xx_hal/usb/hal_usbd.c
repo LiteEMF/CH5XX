@@ -90,7 +90,7 @@ void USBHD_IRQHandler( void )	interrupt INT_NO_USB using 1               /* USB�
             len = USB_RX_LEN;
             if (len == sizeof(usb_control_request_t)) {
                 UEP0_T_LEN = 0;
-                usbd_setup_event(USBD_ID, Ep0Buffer , sizeof(usb_control_request_t));
+                usbd_setup_event(USBD_ID, (usb_control_request_t*)Ep0Buffer , sizeof(usb_control_request_t));
             } else {
                 UEP0_CTRL = bUEP_R_TOG | bUEP_T_TOG | UEP_R_RES_STALL | UEP_T_RES_STALL; // STALL
             }
@@ -126,7 +126,7 @@ error_t hal_usbd_endp_dma_init(uint8_t id)
 }
 error_t hal_usbd_endp_open(uint8_t id, usb_endp_t* pendp)
 {
-    uint8d_t mode = 0, ctrl = 0;
+    uint8d_t mode = 0, ctrl = 0, mask = 0;
     // logd("enp init %d %d\n",(uint16_t)(endp), (uint16_t)(in_out));
 
     if (0 == pendp->addr) {
@@ -137,9 +137,11 @@ error_t hal_usbd_endp_open(uint8_t id, usb_endp_t* pendp)
     if (pendp->dir) {
         mode |= bUEP2_TX_EN;
         ctrl |= UEP_T_RES_NAK;
+        mask = MASK_UEP_T_RES;
     } else {
         mode |= bUEP2_RX_EN;
         ctrl |= UEP_R_RES_ACK;
+        mask = MASK_UEP_R_RES;
     }
     if ((pendp->addr == 1) || (pendp->addr == 3)) {
         mode <<= 4;
@@ -148,19 +150,19 @@ error_t hal_usbd_endp_open(uint8_t id, usb_endp_t* pendp)
     switch (pendp->addr) {
     case 1:
         UEP4_1_MOD |= mode;
-        UEP1_CTRL = bUEP_AUTO_TOG | ctrl; // 端点1自动翻转同步标志位，IN事务返回NAK，OUT返回ACK
+        UEP1_CTRL = (UEP1_CTRL & ~mask) | ctrl | bUEP_AUTO_TOG;   // 端点1自动翻转同步标志位，IN事务返回NAK，OUT返回ACK
         break;
     case 2:
         UEP2_3_MOD |= mode;
-        UEP2_CTRL = bUEP_AUTO_TOG | ctrl; // 端点2自动翻转同步标志位，IN事务返回NAK，OUT返回ACK
+        UEP2_CTRL = (UEP2_CTRL & ~mask) | ctrl | bUEP_AUTO_TOG; // 端点2自动翻转同步标志位，IN事务返回NAK，OUT返回ACK
         break;
     case 3:
         UEP2_3_MOD |= mode;
-        UEP3_CTRL = bUEP_AUTO_TOG | ctrl; // 端点3自动翻转同步标志位，IN事务返回NAK，OUT返回ACK
+        UEP3_CTRL = (UEP3_CTRL & ~mask) | ctrl | bUEP_AUTO_TOG; // 端点3自动翻转同步标志位，IN事务返回NAK，OUT返回ACK
         break;
     case 4:
         UEP4_1_MOD |= mode; 
-        UEP4_CTRL = ctrl;               // 端点4不支持自动翻转同步标志位 
+        UEP4_CTRL = (UEP4_CTRL & ~mask) | ctrl;               // 端点4不支持自动翻转同步标志位 
         break;
     }
 
@@ -177,15 +179,23 @@ error_t hal_usbd_endp_close(uint8_t id, uint8_t ep)
 
     switch (ep_addr) {
     case 1:
+        UEP1_T_LEN = 0;
+        UEP1_CTRL = UEP_R_RES_ACK | UEP_T_RES_NAK;
         UEP4_1_MOD &= ~(bUEP1_TX_EN | bUEP1_RX_EN | bUEP1_BUF_MOD);
         break;
     case 2:
+        UEP2_T_LEN = 0;
+        UEP2_CTRL = UEP_R_RES_ACK | UEP_T_RES_NAK;
         UEP2_3_MOD &= ~(bUEP2_TX_EN | bUEP2_RX_EN | bUEP2_BUF_MOD);
         break;
     case 3:
+        UEP3_T_LEN = 0;
+        UEP3_CTRL = UEP_R_RES_ACK | UEP_T_RES_NAK;
         UEP2_3_MOD &= ~(bUEP3_TX_EN | bUEP3_RX_EN | bUEP3_BUF_MOD);
         break;
     case 4:
+        UEP4_T_LEN = 0;
+        UEP4_CTRL = UEP_R_RES_ACK | UEP_T_RES_NAK;
         UEP4_1_MOD &= ~(bUEP4_TX_EN | bUEP4_RX_EN);     //端点4 dma buf和端点0 共用
         break;
     }
@@ -404,6 +414,7 @@ uint8_t* hal_usbd_get_endp_buffer(uint8_t id, uint8_t ep)
 }
 
 
+
 /*******************************************************************
 ** Parameters: buf: ch32f103平台端点0时参数无效,使用usbd_req_t中数据发送
 ** Returns:
@@ -433,7 +444,7 @@ error_t hal_usbd_in(uint8_t id, uint8_t ep, uint8_t* buf, uint16_t len)
             if((preq->setup_index == preq->setup_len)){
                 if(USBD_ENDP0_MTU != send_len){             //判断发送最后一包数据
                     usbd_free_setup_buffer(preq);           //发送完成释放内存
-                    hal_usbd_endp_ack(id, 0X00, 0);         //开始接收
+                    hal_usbd_endp_ack(id, 0x00, 0);         //开始接收
                 }
             }
         }else{
@@ -454,6 +465,7 @@ error_t hal_usbd_out(uint8_t id, uint8_t ep, uint8_t* buf, uint16_t* plen)
     p = hal_usbd_get_endp_buffer(id, ep);
     if(NULL != buf) memcpy(buf, p,*plen);
     hal_usbd_endp_ack(id, ep, 0);
+
 
     return ERROR_SUCCESS;
 }

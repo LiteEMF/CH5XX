@@ -60,8 +60,9 @@ extern "C" {
 
 		#define API_USBD_BIT_ENABLE			BIT(0)
 		#define USBD_NUM					1
-		#define USBD_TYPE_SUPPORT 			BIT_ENUM(DEV_TYPE_HID)
-		#define USBD_HID_SUPPORT			(BIT_ENUM(HID_TYPE_KB) | BIT_ENUM(HID_TYPE_MOUSE) | BIT_ENUM(HID_TYPE_CONSUMER))
+		#define USBD_TYPE_SUPPORT 			(BIT_ENUM(DEV_TYPE_MSD))
+		// #define USBD_TYPE_SUPPORT 			(BIT_ENUM(DEV_TYPE_HID))
+		// #define USBD_HID_SUPPORT			(BIT_ENUM(HID_TYPE_KB) | BIT_ENUM(HID_TYPE_MOUSE) | BIT_ENUM(HID_TYPE_CONSUMER))
 		// #define USBD_HID_SUPPORT			(BIT_ENUM(HID_TYPE_KB))
 
 		#define API_USBH_BIT_ENABLE			0 //(BIT(0) | BIT(1))
@@ -70,7 +71,7 @@ extern "C" {
 		#define USBH_HID_SUPPORT			(BIT_ENUM(HID_TYPE_KB) | BIT_ENUM(HID_TYPE_MOUSE) | BIT_ENUM(HID_TYPE_CONSUMER))
 
 
-		#define EMF_MEMPOLL_SIZE			(0x200)
+		#define EMF_MEMPOLL_SIZE			(0x180)
 
 		#define SW_VERSION                     	0x01
         #define DEFAULT_NAME			       	"gamepad"
