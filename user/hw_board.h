@@ -37,8 +37,8 @@ extern "C" {
 
 		//adc
 		#define HW_ADC_MAP {	\
-			{PB_00,0,VAL2FLD(ADC_CHANNEL,0)},		\
-			{PA_01,0,VAL2FLD(ADC_CHANNEL,1) | VAL2FLD(ADC_PULL,1)}			\
+			{PB_00,0,VAL2FLD(ADC_CH,0)},		\
+			{PA_01,0,VAL2FLD(ADC_CH,1) | VAL2FLD(ADC_PULL,1)}			\
 			}
 		//spi
 		#define HW_SPI_HOST_MAP {\

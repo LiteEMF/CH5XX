@@ -23,8 +23,8 @@
 ** Defined
 *******************************************************************************************************/
 // #define HW_ADC_MAP {	\
-// 			{PB_00,0,VAL2FLD(ADC_CHANNEL,0)},		\
-// 			{PA_01,0,VAL2FLD(ADC_CHANNEL,1) | VAL2FLD(ADC_PULL,1)}			\
+// 			{PB_00,0,VAL2FLD(ADC_CH,0)},		\
+// 			{PA_01,0,VAL2FLD(ADC_CH,1) | VAL2FLD(ADC_PULL,1)}			\
 // 			}
 /******************************************************************************************************
 **	static Parameters
@@ -71,7 +71,7 @@ void ADCInterrupt( void ) interrupt INT_NO_ADC using 1                       //A
     }
     ADCbuf[adc_id_index] = ADC_FIFO;
 	if(++adc_id_index >= m_adc_num) adc_id_index = 0;
-	ADC_CHANN = ADC_CHANNEL_ATT(adc_id_index);                                                          //切换ADC通道
+	ADC_CHANN = ADC_CH_ATT(adc_id_index);                                                          //切换ADC通道
     hal_adc_start_scan();
 }
 
@@ -121,7 +121,7 @@ bool hal_adc_init(void)
 //	ADC_EX_SW &= ~bADC_RESOLUTION;       	//采样位数10bit
 
 	adc_id_index = 0;
-	ADC_CHANN = ADC_CHANNEL_ATT(0);       
+	ADC_CHANN = ADC_CH_ATT(0);       
     delay_us(100);                       	//确保ADC正常启动	
 
 	InitADCInterrupt();                                                        //ADC中断初始化
