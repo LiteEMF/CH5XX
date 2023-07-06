@@ -68,7 +68,7 @@ void USBHD_IRQHandler( void )	interrupt INT_NO_USB using 1               /* USB�
         switch (intst & MASK_UIS_TOKEN) {
 
         case UIS_TOKEN_IN:
-            usbd_endp_in_event(USBD_ID, USB_DIR_IN_MASK | ep);
+            usbd_endp_in_event(USBD_ID, TUSB_DIR_IN_MASK | ep);
             if(0 == ep){
                 UEP0_CTRL ^= bUEP_T_TOG; // 同步标志位翻转
             }else if(4 == ep){
@@ -429,7 +429,7 @@ error_t hal_usbd_in(uint8_t id, uint8_t ep, uint8_t* buf, uint16_t len)
     error_t err = ERROR_FAILE;
     uint8_t ep_addr = ep & 0x7f;
     uint16_t send_len;
-    uint8_t* endp_buf = hal_usbd_get_endp_buffer(id, USB_DIR_IN_MASK | ep);
+    uint8_t* endp_buf = hal_usbd_get_endp_buffer(id, TUSB_DIR_IN_MASK | ep);
 
     if(0 == ep_addr){
         usbd_req_t *preq = usbd_get_req(id);

@@ -183,8 +183,8 @@ UINT8 EnableRootHubPort( UINT8 id,usb_speed_t* pspeed )
 	if ((id >> 4) == 1) {
 		if (USB_HUB_ST & bUHS_H1_ATTACH){ // HUB1有设备
 			if ((UHUB1_CTRL & bUH_PORT_EN) == 0x00){ // 尚未使能
-				*pspeed = USB_HUB_ST & bUHS_HM_LEVEL ? USB_SPEED_LOW : USB_SPEED_FULL;
-				if (USB_SPEED_LOW == *pspeed) {
+				*pspeed = USB_HUB_ST & bUHS_HM_LEVEL ? TUSB_SPEED_LOW : TUSB_SPEED_FULL;
+				if (TUSB_SPEED_LOW == *pspeed) {
 					UHUB1_CTRL |= bUH_LOW_SPEED; // 低速
 				}
 			}
@@ -194,8 +194,8 @@ UINT8 EnableRootHubPort( UINT8 id,usb_speed_t* pspeed )
 	} else {
 		if (USB_HUB_ST & bUHS_H0_ATTACH){ // HUB0有设备
 			if ((UHUB0_CTRL & bUH_PORT_EN) == 0x00){ // 尚未使能
-				*pspeed = USB_HUB_ST & bUHS_DM_LEVEL ? USB_SPEED_LOW : USB_SPEED_FULL;
-				if (USB_SPEED_LOW == *pspeed) {
+				*pspeed = USB_HUB_ST & bUHS_DM_LEVEL ? TUSB_SPEED_LOW : TUSB_SPEED_FULL;
+				if (TUSB_SPEED_LOW == *pspeed) {
 					UHUB0_CTRL |= bUH_LOW_SPEED; // 低速
 				}
 			}
