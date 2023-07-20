@@ -515,6 +515,16 @@ uint8_t USBHDH_SendEndpData( uint8_t endp_num, uint8_t *pendp_tog, uint8_t *pbuf
 ** Returns:	
 ** Description:		
 *******************************************************************/
+error_t hal_usbh_set_status(uint8_t id,usb_state_t usb_sta)
+{
+	return ERROR_SUCCESS;
+}
+
+/*******************************************************************
+** Parameters:		
+** Returns:	
+** Description:		
+*******************************************************************/
 error_t hal_usbh_port_en(uint8_t id,uint8_t en, usb_speed_t* pspeed)
 {
 	uint8_t i,s;
@@ -544,7 +554,7 @@ error_t hal_usbh_set_speed(uint8_t id, usb_speed_t speed)
 	SetUsbSpeed(speed);
 	return ERROR_SUCCESS;
 }
-error_t hal_usbh_port_reset(uint8_t id)
+error_t hal_usbh_port_reset(uint8_t id, uint8_t reset_ms)
 {
 	return ResetRootHubPort( id );
 }
