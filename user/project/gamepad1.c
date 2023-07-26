@@ -78,7 +78,7 @@ void usbh_class_itf_alt_select(uint8_t id,usbh_class_t* pclass)
 	usbh_dev_t* pdev = get_usbh_dev(id);
 	usbh_class_t *pos;
 
-	list_for_each_entry(pos,&pdev->class_list, usbh_class_t, list){
+	list_for_each_entry_type(pos,&pdev->class_list, usbh_class_t, list){
 		if(pos->itf.if_num == pclass->itf.if_num){
 			free_usbh_class(pclass);			//默认使用alt 0
 			// free_usbh_class(pos);

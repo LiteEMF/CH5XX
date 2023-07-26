@@ -117,7 +117,7 @@ void    SetHostUsbAddr( UINT8 addr )
 *******************************************************************************/
 void    SetUsbSpeed( usb_speed_t speed )
 {
-    if (USB_SPEED_FULL == speed) { // full speed
+    if (TUSB_SPEED_FULL == speed) { // full speed
 		USB_CTRL &= ~bUC_LOW_SPEED; // 全速
 		UH_SETUP &= ~bUH_PRE_PID_EN; // 禁止PRE PID
     } else {
@@ -515,16 +515,6 @@ uint8_t USBHDH_SendEndpData( uint8_t endp_num, uint8_t *pendp_tog, uint8_t *pbuf
 ** Returns:	
 ** Description:		
 *******************************************************************/
-error_t hal_usbh_set_status(uint8_t id,usb_state_t usb_sta)
-{
-	return ERROR_SUCCESS;
-}
-
-/*******************************************************************
-** Parameters:		
-** Returns:	
-** Description:		
-*******************************************************************/
 error_t hal_usbh_port_en(uint8_t id,uint8_t en, usb_speed_t* pspeed)
 {
 	uint8_t i,s;
@@ -577,7 +567,7 @@ error_t hal_usbh_ctrl_transfer( uint8_t id, usb_control_request_t* preq,uint8_t*
     usbh_dev_t* pdev = get_usbh_dev(id);
 
     err = HostCtrlTransfer( pdev->endp0_mtu,  (USB_SETUP_REQ *)preq, buf, plen );
-logd("HostCtrlTransfer len=%x\n",*plen);
+
     err =  err ?  ERROR_FAILE: ERROR_SUCCESS;
 	return err;
 }
